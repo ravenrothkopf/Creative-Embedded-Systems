@@ -12,7 +12,7 @@ Every 5 seconds, the display goes into deep sleep mode to conserve battery.
 ## Materials
 ### Hardware/software
 - ESP32 TTGO T-display
-- 220mAmp battery
+- 220mAh battery
 - USB-C
 - Mac (version 13.X)
 - Arduino IDE (https://www.arduino.cc/en/software)
