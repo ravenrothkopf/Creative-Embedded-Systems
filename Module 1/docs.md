@@ -57,11 +57,12 @@ Installation Video: [https://youtube.com/shorts/8n0QKmH3J9U?feature=share](https
 ![](IMG_1913.JPG)
 8. Connect the adapter to the battery, and then connect the other side to the ESP32.
 9. Place the battery, adapter, and ESP32 inside of the envelope so that the ESP32 screen is displayed. Use tape to secure the ESP32 and battery safely to the inside of the envelope.
-![](card.png)
+![](inside.png)
 11. Punch a hole in your envelope and tie one side of your twine around that hole.
-12. Drill a hole in your popsicle stick and tie the other side of your twine around that hole. Secure with tape.
-
+![](envelope.png)
+13. Drill a hole in your popsicle stick and tie the other side of your twine around that hole. Secure with tape.
 14. Hang the popsicle stick from the cieling so that your envelope is on display.
-15. Enjoy!
+![](cards.JPG)
+16. Enjoy!
 
 
