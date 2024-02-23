@@ -20,7 +20,7 @@ Installation Video: [https://youtube.com/shorts/8n0QKmH3J9U?feature=share](https
 ### Installation materials
 - Envelope
 - Scotch tape
-- Twine (~2ft)
+- Twine (~3ft)
 - Popsicle stick
 - Shrink wrap
 - Art suplies of your choice
@@ -44,16 +44,21 @@ Installation Video: [https://youtube.com/shorts/8n0QKmH3J9U?feature=share](https
 6. In your computer's finder, go to file User_Setup_Select.h, comment out all the lines except for line: `#include<User_Setups/Setup25_TTGO_T_Display.h>`
 
 ## Dowload and Upload Code
-1. To Download the code: `git clone https://github.com/ravenrothkopf/Creative-Embedded-Systems.git`
+1. To Download the code: `git clone https://github.com/ravenrothkopf/Creative-Embedded-Systems/Module`
 2. Open the file `candy_hearts.ino` in the Arduino IDE
 3. Plug in USB-C into computer and the ESP32
 4. Select Upload to flash the code to the ESP32
 
 ## Instalation
-1. Cut a rectangle the size of your TTGO T-Display screen out of the front of your envelope
-2. Decorate your envelope with your chosen art suplies
-3. 
-4. Punch a hole in your envelope and tie one side of your twine around that hole.
-5. Drill a hole in your popsicle stck and tie the other side of your twine around that hole. Secure with tape.
+1. Cut a rectangle the size of your TTGO T-Display screen out of the front of your envelope.
+2. Decorate your envelope with your chosen art suplies.
+4. Cut two 1cm pieces of shrink wrap.
+6. Use the heat gun to mold the shrink wrap to the exposed metal part of the red and black wires of the adapter.
+7. Connect the adapter to the battery, and then connect the other side to the ESP32.
+8. Place the battery, adapter, and ESP32 inside of the envelope so that the ESP32 screen is displayed. Use tape to secure the ESP32 and battery safely to the inside of the envelope.
+10. Punch a hole in your envelope and tie one side of your twine around that hole.
+11. Drill a hole in your popsicle stick and tie the other side of your twine around that hole. Secure with tape.
+12. Hang the popsicle stick from the cieling so that your envelope is on display.
+13. Enjoy!
 
 
