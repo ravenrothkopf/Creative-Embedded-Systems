@@ -48,7 +48,7 @@ Every 5 seconds, the display goes into deep sleep mode to conserve battery.
 2. Plug in USB-C into computer and the ESP32
 3. Select Upload to flash the code to the ESP32
 
-## Instalation
+## Installation
 1. Cut a rectangle the size of your TTGO T-Display screen out of the front of your envelope.
 2. Decorate your envelope with your chosen art supplies.
 3. Cut two 1cm pieces of shrink wrap.
