@@ -14,8 +14,10 @@ Music by Shade Rothkopf
 
 import pygame
 import random
+import serial
 
 pygame.init()  # vroom vroom
+ser = serial.Serial('/dev/cu.wchusbserial56230319291', 9600, timeout=0)  # open serial port
 
 # Define some variables
 BLACK = (0, 0, 0)
@@ -76,6 +78,8 @@ class Player(pygame.sprite.Sprite):
         self.walls = None
 
     def changespeed(self, x, y):
+        self.change_x = 0  # Reset the x-axis speed
+        self.change_y = 0  # Reset the y-axis speed
         self.change_x += x
         self.change_y += y
 
@@ -709,9 +713,34 @@ def game_over():
         clock.tick(60)
     return end_game
 
+THRESHOLD = 4095
+current_movement = (0, 0)
+
 # -------- Main Program Loop -----------
 while not done:
     # --- Main event loop (input from user mouse, keyboard or controller)
+    # read serial data
+    # serial_data = ser.readline().decode().strip()
+    
+    # # interpret data
+    # if serial_data:
+    #     # Split the serial data into X, Y, and Button state
+    #     x_value, y_value, button_state = map(int, serial_data.split(','))
+
+    #     player.changespeed(0, 0)
+
+    #     if x_value < THRESHOLD and y_value == 0:
+    #         player.changespeed(-3, 0)  # Move left
+    #         player.image = player.image2
+    #     elif x_value < THRESHOLD and y_value == THRESHOLD:
+    #         player.changespeed(3, 0)  # Move right
+    #         player.image = player.image1
+    #     elif x_value == THRESHOLD and y_value < THRESHOLD:
+    #         player.changespeed(0, -3)  # Move up
+    #     elif x_value == 0 and y_value < THRESHOLD:
+    #         player.changespeed(0, 3)  # Move down
+
+    # --- Main event loop (keyboard input) ---
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
@@ -736,8 +765,6 @@ while not done:
             elif event.key == pygame.K_DOWN and player.change_y > 0:
                 player.changespeed(0, -3)
 
-    # --- Game logic should go here
-    # move Peach (BOUNCE)
     peach_x += peach_change_x
     if peach_x > 545:
         peach_change_x = peach_change_x * -1
@@ -771,6 +798,7 @@ while not done:
     coin_hit_list = pygame.sprite.spritecollide(player, coin_list, True)
     for coin in coin_hit_list:
         score += 1
+        ser.write(b'y')
 
     for wall in wall_list:
         pygame.sprite.spritecollide(wall, coin_list, True)
@@ -781,12 +809,19 @@ while not done:
         lives += 1
         one_ups -= 1
         mushroom_sound.play()
+        ser.write(b'g')
 
     # player/goomba collision
     goomba_hit_list = pygame.sprite.spritecollide(player, goomba_list, True)
     for goomba in goomba_hit_list:
         lives -= 1
         goomba_hit.play(0)
+        ser.write(b'r')
+
+        if goomba == bluegoomba:
+            bluegoomba.rect.center = (100, 650)
+            goomba_list.add(bluegoomba)
+            all_sprites_list.add(bluegoomba)
 
         if goomba == redgoomba:
             redgoomba.rect.center = (650, 650)
@@ -802,11 +837,6 @@ while not done:
             browngoomba.rect.center = (650, 100)
             goomba_list.add(browngoomba)
             all_sprites_list.add(browngoomba)
-
-        if goomba == bluegoomba:
-            browngoomba.rect.center = (100, 650)
-            goomba_list.add(bluegoomba)
-            all_sprites_list.add(bluegoomba)
 
     # CONDITIONS FOR LOSING/BEATING A LEVEL
     if lives <= 0 or lives == 0:
@@ -932,4 +962,5 @@ while not done:
     clock.tick(60)  # frames per second
 
 # Close the window and quit.
+ser.close()
 pygame.quit()
