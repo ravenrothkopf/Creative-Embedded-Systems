@@ -627,6 +627,18 @@ def instructions_screen():
     my_font = pygame.font.SysFont("Calibri", 20, True, False)
     special_font = pygame.font.Font("game.ttf", 30)
     while not done:
+        # # read serial data
+        # serial_data = ser.readline().decode().strip()
+    
+        # # interpret data
+        # if serial_data:
+        #     # Split the serial data into X, Y, and Button state
+        #     _, _, button_state = map(int, serial_data.split(','))
+        #     if button_state == 1:
+        #         done = True
+        #     else:
+        #         done = False
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -720,50 +732,30 @@ current_movement = (0, 0)
 while not done:
     # --- Main event loop (input from user mouse, keyboard or controller)
     # read serial data
-    # serial_data = ser.readline().decode().strip()
+    serial_data = ser.readline().decode().strip()
     
-    # # interpret data
-    # if serial_data:
-    #     # Split the serial data into X, Y, and Button state
-    #     x_value, y_value, button_state = map(int, serial_data.split(','))
+    # interpret data
+    if serial_data:
+        # Split the serial data into X, Y, and Button state
+        x_value, y_value, button_state = map(int, serial_data.split(','))
 
-    #     player.changespeed(0, 0)
+        player.changespeed(0, 0)
 
-    #     if x_value < THRESHOLD and y_value == 0:
-    #         player.changespeed(-3, 0)  # Move left
-    #         player.image = player.image2
-    #     elif x_value < THRESHOLD and y_value == THRESHOLD:
-    #         player.changespeed(3, 0)  # Move right
-    #         player.image = player.image1
-    #     elif x_value == THRESHOLD and y_value < THRESHOLD:
-    #         player.changespeed(0, -3)  # Move up
-    #     elif x_value == 0 and y_value < THRESHOLD:
-    #         player.changespeed(0, 3)  # Move down
+        if x_value < THRESHOLD and y_value == 0:
+            player.changespeed(-3, 0)  # Move left
+            player.image = player.image2
+        elif x_value < THRESHOLD and y_value == THRESHOLD:
+            player.changespeed(3, 0)  # Move right
+            player.image = player.image1
+        elif x_value == THRESHOLD and y_value < THRESHOLD:
+            player.changespeed(0, -3)  # Move up
+        elif x_value == 0 and y_value < THRESHOLD:
+            player.changespeed(0, 3)  # Move down
 
     # --- Main event loop (keyboard input) ---
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                player.changespeed(-3, 0)
-                player.image = player.image2
-            elif event.key == pygame.K_RIGHT:
-                player.changespeed(3, 0)
-                player.image = player.image1
-            elif event.key == pygame.K_UP:
-                player.changespeed(0, -3)
-            elif event.key == pygame.K_DOWN:
-                player.changespeed(0, 3)
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT and player.change_x < 0:
-                player.changespeed(3, 0)
-            elif event.key == pygame.K_RIGHT and player.change_x > 0:
-                player.changespeed(-3, 0)
-            elif event.key == pygame.K_UP and player.change_y < 0:
-                player.changespeed(0, 3)
-            elif event.key == pygame.K_DOWN and player.change_y > 0:
-                player.changespeed(0, -3)
 
     peach_x += peach_change_x
     if peach_x > 545:
@@ -887,14 +879,13 @@ while not done:
             one_ups -= 1
             mushroom_sound.play()
 
-    if score == 548 or score == 1096 or score == 1644 or score == 2192 or score == 2740 or score == 3288 or score == 3836 or score == 4384 or score == 4932 or score == 5480 or score == 6028 or score == 6576 or score == 7124 or score == 7672 or score == 8220:
+    if score == 20 or score == 1096 or score == 1644 or score == 2192 or score == 2740 or score == 3288 or score == 3836 or score == 4384 or score == 4932 or score == 5480 or score == 6028 or score == 6576 or score == 7124 or score == 7672 or score == 8220:
         # reset player
         player.reset()
+        ser.write(b'x')
 
         for coin in coin_list:
             coin.kill()
-
-        print(redgoomba.speed)
 
         # LEVEL CLEAR
         level_clear.play(0)

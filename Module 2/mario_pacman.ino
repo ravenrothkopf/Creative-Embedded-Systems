@@ -1,12 +1,12 @@
 // Joystick
-int VRx = 2;
-int VRy = 15;
-int SW = 13;
+int VRx = 12;
+int VRy = 13;
+int SW = 15;
 
 // LED pins
-int redLEDPin = 32;
-int yellowLEDPin = 33;
-int greenLEDPin = 25;
+int redLEDPin = 22;
+int yellowLEDPin = 2;
+int greenLEDPin = 21;
 
 void setup() {
   Serial.begin(9600);
@@ -27,21 +27,33 @@ void loop() {
   Serial.print(",");
   Serial.println(buttonState);
 
+  // Turn off all LEDs
+  digitalWrite(redLEDPin, LOW);
+  digitalWrite(yellowLEDPin, LOW);
+  digitalWrite(greenLEDPin, LOW);
+
   if (Serial.available()) {
     char receivedChar = Serial.read();
     
-    // Turn off all LEDs
-    digitalWrite(redLEDPin, LOW);
-    digitalWrite(yellowLEDPin, LOW);
-    digitalWrite(greenLEDPin, LOW);
-    
     // Turn on the corresponding LED based on the received character
-    if (receivedChar == 'r') {
-      digitalWrite(redLEDPin, HIGH);
-    } else if (receivedChar == 'y') {
+    if (receivedChar == 'y') {
       digitalWrite(yellowLEDPin, HIGH);
     } else if (receivedChar == 'g') {
       digitalWrite(greenLEDPin, HIGH);
+    } else if (receivedChar == 'r') {
+       digitalWrite(redLEDPin, HIGH);
+    } else if (receivedChar == 'x') {
+       for (int i = 0; i < 18; i++) {
+        digitalWrite(greenLEDPin, HIGH);
+        delay(100);
+        digitalWrite(greenLEDPin, LOW);
+        digitalWrite(yellowLEDPin, HIGH);
+        delay(100);
+        digitalWrite(yellowLEDPin, LOW);
+        digitalWrite(redLEDPin, HIGH);
+        delay(100);
+        digitalWrite(redLEDPin, LOW);
+       }
     }
   }
 
