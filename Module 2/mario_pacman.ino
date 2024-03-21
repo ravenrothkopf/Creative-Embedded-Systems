@@ -1,12 +1,12 @@
 // Joystick
 int VRx = 12;
-int VRy = 13;
-int SW = 15;
+int VRy = 15;
+int SW = 13;
 
 // LED pins
 int redLEDPin = 22;
-int yellowLEDPin = 2;
-int greenLEDPin = 21;
+int yellowLEDPin = 21;
+int greenLEDPin = 17;
 
 void setup() {
   Serial.begin(9600);
@@ -59,3 +59,4 @@ void loop() {
 
   delay(100);
 }
+
