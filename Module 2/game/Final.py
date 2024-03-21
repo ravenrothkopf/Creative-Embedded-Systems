@@ -162,7 +162,7 @@ class Goomba(pygame.sprite.Sprite):
         self.speed = 2
 
     def speed_up(self):
-        self.speed += 1.5
+        self.speed += 1.2
 
     def update(self):
         self.rect.x += self.change_x
@@ -287,7 +287,7 @@ wall = Wall(20, 570, 125, 50, DARK_PURPLE)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
-wall = Wall(20, 240, 85, 30, DARK_PURPLE)
+wall = Wall(20, 240, 75, 30, DARK_PURPLE)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
@@ -315,11 +315,11 @@ wall = Wall(30, 170, 75, 40, DARK_PURPLE)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
-wall = Wall(273, 170, 27, 50, DARK_PURPLE)
+wall = Wall(273, 170, 27, 45, DARK_PURPLE)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
-wall = Wall(273, 188, 40, 37, DARK_PURPLE)
+wall = Wall(273, 188, 40, 32, DARK_PURPLE)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
@@ -411,7 +411,7 @@ wall = Wall(60, 80, 240, 15, GREEN)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
-wall = Wall(180, 80, 15, 60, GREEN)
+wall = Wall(180, 80, 15, 50, GREEN)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
@@ -473,7 +473,7 @@ wall = Wall(625, 80, 15, 70, GREEN)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
-wall = Wall(400, 188, 240, 15, GREEN)
+wall = Wall(405, 188, 230, 15, GREEN)
 wall_list.add(wall)
 all_sprites_list.add(wall)
 
@@ -558,15 +558,19 @@ def intro_screen():
     done = False
     my_font = pygame.font.Font("game.ttf", 20)
     while not done:
+        # read serial data
+        serial_data = ser.readline().decode().strip()
+    
+        # interpret data
+        if serial_data:
+            _, _, button_state = map(int, serial_data.split(','))
+            if button_state == 0:
+                done = True
+            else:
+                done = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    done = True
-
-                else:
-                    done = False
 
         screen.fill(WHITE)
         screen.blit(mario_bg, [0, 0])
@@ -577,7 +581,7 @@ def intro_screen():
 
         text = my_font.render("Welcome to", True, BLACK)
         text_1 = my_font.render("Super Mario Bros. x Pacman!", True, BLACK)
-        text_2 = my_font.render("Press the space bar", True, BLACK)
+        text_2 = my_font.render("Click the joystick", True, BLACK)
         text_3 = my_font.render("for instructions.", True, BLACK)
 
         screen.blit(text, [300, 215])
@@ -623,30 +627,25 @@ def clear():
 
 # INSTRUCTIONS SCREEN
 def instructions_screen():
+    clock.tick(100)
     done = False
     my_font = pygame.font.SysFont("Calibri", 20, True, False)
     special_font = pygame.font.Font("game.ttf", 30)
     while not done:
-        # # read serial data
-        # serial_data = ser.readline().decode().strip()
+        # read serial data
+        serial_data = ser.readline().decode().strip()
     
-        # # interpret data
-        # if serial_data:
-        #     # Split the serial data into X, Y, and Button state
-        #     _, _, button_state = map(int, serial_data.split(','))
-        #     if button_state == 1:
-        #         done = True
-        #     else:
-        #         done = False
-
+        # interpret data
+        if serial_data:
+            _, _, button_state = map(int, serial_data.split(','))
+            if button_state == 0:
+                done = True
+            else:
+                done = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    done = True
-                else:
-                    done = False
+
         screen.fill(DARK_PURPLE)
         screen.blit(mario_1, [200, 100])
         screen.blit(pacman_1, [400, 100])
@@ -658,7 +657,7 @@ def instructions_screen():
         text_3 = my_font.render("The mushrooms give you an extra life.", True, WHITE)
         text_4 = my_font.render("Collect all of the coins without running out of lives to win!", True, WHITE)
         text_5 = special_font.render("GOOD LUCK :)", True, WHITE)
-        text_6 = my_font.render("(press the space bar to play!)", True, WHITE)
+        text_6 = my_font.render("(click the joystick to play!)", True, WHITE)
 
         screen.blit(text, [235, 270])
         screen.blit(text_1, [70, 340])
@@ -700,24 +699,31 @@ def game_over():
     goomba_list.add(bluegoomba)
 
     while not done:
+        # read serial data
+        serial_data = ser.readline().decode().strip()
+    
+        if serial_data:
+            _, _, button_state = map(int, serial_data.split(','))
+            if button_state == 0:
+                background_music.play(-1)
+                intro_screen()
+                clock.tick(100)
+                instructions_screen()
+                done = True
+                end_game = False
+            else:
+                done = False
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
                 end_game = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    done = True
-                    background_music.play(-1)
-                    intro_screen()
-                    instructions_screen()
-                    end_game = False
-                else:
-                    done = False
+
         screen.fill(BLACK)
         screen.blit(gameover, [250, 150])
 
         text = my_font.render("Want to play again?", True, WHITE)
-        text_1 = my_font.render("Press the space bar to start over.", True, WHITE)
+        text_1 = my_font.render("Click the joystick to start over.", True, WHITE)
         screen.blit(text, [190, 350])
         screen.blit(text_1, [40, 400])
 
@@ -741,7 +747,7 @@ while not done:
 
         player.changespeed(0, 0)
 
-        if x_value < THRESHOLD and y_value == 0:
+        if x_value < THRESHOLD and y_value <= 900:
             player.changespeed(-3, 0)  # Move left
             player.image = player.image2
         elif x_value < THRESHOLD and y_value == THRESHOLD:
@@ -749,7 +755,7 @@ while not done:
             player.image = player.image1
         elif x_value == THRESHOLD and y_value < THRESHOLD:
             player.changespeed(0, -3)  # Move up
-        elif x_value == 0 and y_value < THRESHOLD:
+        elif x_value <= 900 and y_value < THRESHOLD:
             player.changespeed(0, 3)  # Move down
 
     # --- Main event loop (keyboard input) ---
@@ -879,7 +885,8 @@ while not done:
             one_ups -= 1
             mushroom_sound.play()
 
-    if score == 20 or score == 1096 or score == 1644 or score == 2192 or score == 2740 or score == 3288 or score == 3836 or score == 4384 or score == 4932 or score == 5480 or score == 6028 or score == 6576 or score == 7124 or score == 7672 or score == 8220:
+    # level up condition
+    if score == 549 or score == 1098 or score == 1647 or score == 2196 or score == 2745 or score == 3288 or score == 3836 or score == 4384 or score == 4932 or score == 5480 or score == 6028 or score == 6576 or score == 7124 or score == 7672 or score == 8220:
         # reset player
         player.reset()
         ser.write(b'x')
@@ -892,7 +899,7 @@ while not done:
         clear()
         background_music.play(-1)
 
-        lives = 3
+        lives += 3
         one_ups = 2
         level += 1
 
