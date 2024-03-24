@@ -1,6 +1,8 @@
 # Module 2 - Interactive Devices
 The goal of this project was to make an interactive art installation involving a TTGO T-Display and several input interfaces. I chose to revamp an old video game I made at the end of high school with a responsive game controller. My inspiration was restoring a game I made 5 years ago and adding to my first attempt at a programming project with the knowledge I have gained since going through college as a computer science major. My system allows the player to control an 8-bit super mario character in a Pacman-style game. The player must collect all of the coins on the screen while trying to not get hit by the Goombas (ghosts) and collect 1-UPS distributed across the map to help with this mission. The joystick controller button is used to click through the navigational and instructional screens of the game. Three LED lights on the controller respond to different actions during gameplay. The red LED light turns on every time the player gets hit by a Goomba, the yellow LED light every time the player collects a coin, and the green LED light every time the player gets a 1-UP.
 
+<img src="display.png" alt="image" width="400"/>
+
 ## Materials List
 ### Hardware
 - ESP32 TTGO T-display
@@ -9,9 +11,9 @@ The goal of this project was to make an interactive art installation involving a
 - Solderless Breadboard 350 Tie-Points 1 Distribution Strip
 - Joystick
 - 1 each of red, yellow, and green LED lights
-- 3 220 Ω resistors
-- 4 female to male wires
-- 4 male to male wires
+- 3x 220 Ω resistors
+- 4x female to male wires
+- 4x male to male wires
 ### Software
 -  Pygame (version 2.5.X)
 -  Arduino Legacy IDE (1.8.X):
@@ -20,7 +22,7 @@ The goal of this project was to make an interactive art installation involving a
 - Ultimaker 3D printer
 - PLA filament
 - `enclosure.stl` enclosure model
-- 4 3mm screws
+- 4x 3mm screws
 - Scotch tape
 - Hot glue
 - Ribbon (or any long strip of sturdy material)
@@ -32,7 +34,7 @@ The goal of this project was to make an interactive art installation involving a
 ## Getting started: Hardware
 - Attach TTGO and joystick to the breadboard
 - Make the following wire connections for the joystick: bottom left TTGO GND -> negative side of left distribution strip, Joystick GND -> second-to-bottom left ground on the TTGO, Joystick 5V -> bottom left 3V, Joystick VRy -> TTGO 15, Joystick VRx -> TTGO 12, Joystick SW -> TTGO 13
-- Make the following wire connections for the LED lights: Red, yellow, and green LED light to top left of breadboard, cathode in the negative side of the distribution strip, anode... Red LED -> resistor -> TTGO 22, Yellow LED -> resistor -> TTGO 21, Green LED -> resistor -> TTGO 17
+- Make the following wire connections for the LED lights: Red, yellow, and green LED lights to top left of breadboard, cathode in the negative side of the distribution strip, anode to `row a` of breadboard. Red LED -> resistor -> TTGO 22, Yellow LED -> resistor -> TTGO 21, Green LED -> resistor -> TTGO 17
 - Plug in USB-C into computer and the ESP
 - A picture of the full breadboard setup is shown below:
 ## Download and Upload Code
