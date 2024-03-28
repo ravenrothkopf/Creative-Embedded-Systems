@@ -38,6 +38,7 @@ The goal of this project was to make an interactive art installation involving a
 - Plug in USB-C into computer and the ESP
 - A picture of the full breadboard setup is shown below:
 <img src="bb.png" alt="image" width="400"/>
+
 ## Download and Upload Code
 - To download the code:
 ```bash
