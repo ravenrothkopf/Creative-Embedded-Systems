@@ -47,9 +47,9 @@ git clone https://github.com/ravenrothkopf/Creative-Embedded-Systems/tree/main/M
 - Open the `game` folder in Pygame IDE and run Final.py
 - Interact with the joystick and see the LED lights change!
 ## Enclosure
-1. Upload `enclosure.stl` to 3D printing software of choice, add reinforcements, and then print. With the Ultimaker 3D printer this print takes ~5 hours. <img src="enclosure.png" alt="image" width="400"/>
+1. Upload `enclosure.stl` to 3D printing software of choice, add reinforcements, and then print. With the Ultimaker 3D printer this print takes ~5 hours. <img src="print.png" alt="image" width="400"/>
 2. Once print is finished, remove reinforcements and place ribbon horizontally across the bottom of the box with the ends hanging outside of the box.
-3. Place breadboard with TTGO T-Display, joystick and LEDs wiring on top of the ribbon in the box. The breadboard is a very tight fit, so the ribbon is there for an easy removal to ensure that the breadboard does not get stuck in the enclosure.
+3. Place breadboard with TTGO T-Display, joystick and LEDs wiring on top of the ribbon in the box. The breadboard is a very tight fit, so the ribbon is there for an easy removal to ensure that the breadboard does not get stuck in the enclosure. <img src="guts.png" alt="image" width="400"/>
 4. Secure the excess ends of the ribbon to the inside walls of the box.
 5. Secure the joystick to the empty right side of the breadboard with a generous dollop of hot glue and hold in place until cooled. <img src="glue.png" alt="image" width="400"/>
 6. Close up the box with the top, making sure that the LEDs and joystick are sticking out of the holes in the box top.
