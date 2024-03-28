@@ -57,4 +57,4 @@ git clone https://github.com/ravenrothkopf/Creative-Embedded-Systems/tree/main/M
 8. Enjoy! :)
 
   
-![](enclosure.png)
+![](enclosure.jpeg)
