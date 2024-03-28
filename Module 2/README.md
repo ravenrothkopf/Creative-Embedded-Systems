@@ -37,6 +37,7 @@ The goal of this project was to make an interactive art installation involving a
 - Make the following wire connections for the LED lights: Red, yellow, and green LED lights to top left of breadboard, cathode in the negative side of the distribution strip, anode to `row a` of breadboard. Red LED -> resistor -> TTGO 22, Yellow LED -> resistor -> TTGO 21, Green LED -> resistor -> TTGO 17
 - Plug in USB-C into computer and the ESP
 - A picture of the full breadboard setup is shown below:
+<img src="bb.png" alt="image" width="400"/>
 ## Download and Upload Code
 - To download the code:
 ```bash
@@ -46,13 +47,13 @@ git clone https://github.com/ravenrothkopf/Creative-Embedded-Systems/tree/main/M
 - Open the `game` folder in Pygame IDE and run Final.py
 - Interact with the joystick and see the LED lights change!
 ## Enclosure
-1. Upload `enclosure.stl` to 3D printing software of choice, add reinforcements, and then print. With the Ultimaker 3D printer this print takes ~5 hours.
+1. Upload `enclosure.stl` to 3D printing software of choice, add reinforcements, and then print. With the Ultimaker 3D printer this print takes ~5 hours. <img src="enclosure.png" alt="image" width="400"/>
 2. Once print is finished, remove reinforcements and place ribbon horizontally across the bottom of the box with the ends hanging outside of the box.
 3. Place breadboard with TTGO T-Display, joystick and LEDs wiring on top of the ribbon in the box. The breadboard is a very tight fit, so the ribbon is there for an easy removal to ensure that the breadboard does not get stuck in the enclosure.
 4. Secure the excess ends of the ribbon to the inside walls of the box.
-5. Secure the joystick to the empty right side of the breadboard with a generous dollop of hot glue and hold in place until cooled.
+5. Secure the joystick to the empty right side of the breadboard with a generous dollop of hot glue and hold in place until cooled. <img src="glue.png" alt="image" width="400"/>
 6. Close up the box with the top, making sure that the LEDs and joystick are sticking out of the holes in the box top.
-7. Secure the box with 4 3mm screws in designated screw holes.
+7. Secure the box with 4 3mm screws in designated screw holes. <img src="screw.png" alt="image" width="400"/>
 8. Enjoy! :)
 
   
